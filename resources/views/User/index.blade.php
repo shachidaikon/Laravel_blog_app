@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{Auth::user()->name . "'s Blog"}}
+@endsection
+
 @section('content')
 @if(Auth::check())
     <div class="container">
@@ -26,4 +30,3 @@
     </div>
 @endif
 @endsection
-

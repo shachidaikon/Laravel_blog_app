@@ -1,37 +1,44 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="/css/app.css">
-    </head>
-    <body>
-        <h1>Blog Name</h1>
-        <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
-        <form action="/posts/{{$post->id}}" id="form_delete", method="post" style="display:inline">
-            @csrf
-            @method('DELETE')
-            <button class="delete" type="button" onclick="return deletePost(this);">delete</button>
-        </form>
-        <div class="post">
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        
+        <div class="card mb-2 ">
+            <div class="card-header">
+                <h4 class="card-title mb-2 text-primary">{{ $post->title }}</h2> 
+            </div>
             
-            <h2 class='title'>{{ $post->title }}</h2>
-            <p>{{ $post->body }}</p>    
-            <p class='updated_at'>{{$post->updated_at}}</p>
+            <div class="card-body">
+                <h5 class="card-text mb-2">{!! nl2br(e($post->body)) !!}</h5> 
+                <div class="text-right">
+                    <button class="btn btn-outline-secondary mb-2 d-inline" onclick="location.href='/posts/{{ $post->id }}/edit' ">編集</button>
+                    <form action="/posts/{{$post->id}}" id="form_delete" method="post" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-Danger mb-2 d-inline" type="button" onclick="return deletePost();">削除</button>
+                    </form>
+                    <p class="card-text d-inline"><small class="text-muted">{{$post->updated_at}}</p>
+                </div>
+            </div>
         </div>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
-        <script>
-        'use strict'
-            const deletePost = e => {
-                if(confirm('本当に削除しますか？')){
-                    document.getElementById('form_delete').submit();
-                }
+        
+        <button class="btn btn-outline-primary" onclick="location.href='/'">戻る</button>
+    </div>
+    
+
+@endsection
+
+    <script>
+    'use strict'
+        const deletePost = e => {
+            if(confirm('本当に削除しますか？')){
+                document.getElementById('form_delete').submit();
             }
-        </script>
-    </body>
-</html>
+        }
+    </script>
+
+<style lang="scss" scoped>
+    .card-title {
+        color: #fdfdfd;
+    }
+</style>
