@@ -1,28 +1,37 @@
-<!DOCTYPE HTML>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>編集画面</h1>
-        <form action="/posts/{{ $post->id }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="title">
-                <h2>Title</h2>
-                <input type="text" name="post[title]" placeholder="タイトル" value="{{$post->title}}" />
-                <p class="title_error" style="color:red">{{$errors->first('post.title')}}</p>
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h3>編集画面</h3>
             </div>
             
-            <div class="body">
-                <h2>Body</h2>
-                <textarea name="post[body]" >{{$post->body}}</textarea>
-                <p class="body_error" style="color:red">{{$errors->first('post.body')}}</p>
-            </div>
+            <form action="/posts/{{ $post->id }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="mb-2">
+                        <h4 class="form-label">Title</h4>
+                        <input type="text" class="form-control" name="post[title]" placeholder="タイトル" value="{{$post->title}}" />
+                        <p class="title_error" style="color:red">{{$errors->first('post.title')}}</p>
+                    </div>
             
-            <input type="submit" value="保存"/>
-        </form>
-        <div class="back">[<a href="/">back</a>]</div>
-    </body>
-</html>
+                    <div class="mb-2">
+                        <h4 class="form-label">Body</h4>
+                        <textarea class="form-control" rows="5" name="post[body]" >{{$post->body}}</textarea>
+                        <p class="body_error" style="color:red">{{$errors->first('post.body')}}</p>
+                    </div>
+                    <button class="btn btn-outline-secondary mb-2"/>保存</button>
+                </div>
+            
+     
+            </form>
+            
+        </div>
+        
+        <button class="btn btn-outline-primary" onclick="location.href='/'">戻る</button>
+        
+    </div>
+
+@endsection
