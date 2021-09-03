@@ -1,4 +1,8 @@
-@extends('layouts.app') {{--app.blade.phpの継承--}}
+@extends('layouts.app')
+
+@section('title')
+    {{Auth::user()->name . "'s Blog"}}
+@endsection
 
 @section('content')
 @if(Auth::check())
@@ -9,7 +13,7 @@
             <div class="card mb-2">
                     <h4 class='card-header d-flex'>
                         <div class="mr-auto"><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></div>
-                        <small class="text-muted pt-1 mb-0">{{ $post->user->name }}</small>
+                        <p class="mb-0"><small class="text-muted pt-1">{{ $post->user->name }}</small></p>
                     </h4>
                     
                     <p class='card-body'>{!! nl2br(e($post->body)) !!}</p>
@@ -26,4 +30,3 @@
     </div>
 @endif
 @endsection
-

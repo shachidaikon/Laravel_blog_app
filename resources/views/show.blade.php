@@ -10,6 +10,7 @@
             
             <div class="card-body">
                 <h5 class="card-text mb-2">{!! nl2br(e($post->body)) !!}</h5> 
+                @if(Auth::id() === $post->user->id)
                 <div class="text-right">
                     <button class="btn btn-outline-secondary mb-2 d-inline" onclick="location.href='/posts/{{ $post->id }}/edit' ">編集</button>
                     <form action="/posts/{{$post->id}}" id="form_delete" method="post" style="display:inline">
@@ -19,6 +20,7 @@
                     </form>
                     <p class="card-text d-inline"><small class="text-muted">{{$post->updated_at}}</p>
                 </div>
+                @endif
             </div>
         </div>
         
