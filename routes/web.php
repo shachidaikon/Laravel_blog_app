@@ -32,3 +32,6 @@ Route::delete('/posts/{post}', 'PostController@delete');
 
 
 
+//新しく追加
+Route::get('/user/test', 'UserController@index');
+
