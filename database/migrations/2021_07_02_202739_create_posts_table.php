@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 50);      //②文字型、string('カラム名', 数字)で文字数制限指定ができる。
             $table->string('body', 200);
             $table->timestamps();        //③作成日時と更新日時を自動で登録できる。
-            $table->softDeletes();  //④削除日時を自動で登録
+            $table->softDeletes();  //④削除日時を自動で
         });
     }
 
