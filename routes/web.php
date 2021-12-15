@@ -15,23 +15,22 @@
 //     return view('welcome');
 // });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/','PostController@index');
-Route::get('/posts/create', 'PostController@create');
-Route::get('/posts/{post}', 'PostController@show');
-Route::get('/posts/{post}/edit', 'PostController@edit');
-
-Route::get('/user/', 'UserController@index')->name('user.index');
-
-Route::post('/posts', 'PostController@store');
-Route::put('/posts/{post}', 'PostController@update');
-Route::delete('/posts/{post}', 'PostController@delete');
+Route::group(['middleware' => 'auth'], function(){
+   
+    Route::get('/','PostController@index');  
+    Route::get('/posts/create', 'PostController@create');
+    Route::get('/posts/{post}', 'PostController@show');
+    Route::get('/posts/{post}/edit', 'PostController@edit');
+    Route::post('/posts', 'PostController@store');
+    Route::put('/posts/{post}', 'PostController@update');
+    Route::delete('/posts/{post}', 'PostController@delete');
 
 
+    Route::get('/user/', 'UserController@index')->name('user.index');
 
-//新しく追加
+});
+
 Route::get('/user/test', 'UserController@index');
+Auth::routes();
 
